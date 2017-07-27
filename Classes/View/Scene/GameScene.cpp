@@ -11,11 +11,11 @@
 #include "MenuController.h"
 
 bool GameScene::init(){
-    CCScene::init();
+    Scene::init();
     
-    CCLayer* cc = ChessboardController::create();
+    Layer* cc = ChessboardController::create();
     this->addChild(cc);
-    CCLayer* mc = MenuController::create();
+    Layer* mc = MenuController::create();
     this->addChild(mc);
     
     return true;

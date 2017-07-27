@@ -20,11 +20,11 @@ using namespace cocos2d;
 
 class HelpController : public ChessboardController {
 private:
-    CCArray* intros;
+    __Array* intros;
     std::vector<ChessboardData> datas;
     std::vector<Move> moves;
     int progress;
-    CCLabelTTF* label;
+    Label* label;
     
 public:
     ~HelpController();

@@ -13,7 +13,7 @@
 
 using namespace cocos2d;
 
-class GameScene : public CCScene {
+class GameScene : public Scene {
     
 public:
     virtual bool init();

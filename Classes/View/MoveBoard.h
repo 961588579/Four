@@ -13,7 +13,7 @@
 
 using namespace cocos2d;
 
-class MoveBoard : public CCLabelTTF {
+class MoveBoard : public Label {
 private:
     int leftMoves;
     
@@ -24,7 +24,7 @@ public:
     void onEnter();
     void onExit();
     
-    void onNextRound(CCObject* o);
+    void onNextRound(Ref* o);
 };
 
 #endif /* defined(__Four__MoveBoard__) */

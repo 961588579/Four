@@ -20,7 +20,7 @@ using std::stack;
 
 #include "cocos2d.h"
 using cocos2d::CCArray;
-using cocos2d::CCPoint;
+using cocos2d::Vec2;
 
 class Chessboard : public Model {
     CC_SYNTHESIZE_PASS_BY_REF(Move, currentMove, CurrentMove);
@@ -30,10 +30,10 @@ private:
     // 棋盘代表了存储棋子类型的二维数组
     stack< Move > moves;
     
-    void setPiece(const cocos2d::CCPoint& p, PIECE type);
+    void setPiece(const cocos2d::Vec2& p, PIECE type);
     
 public:
-    explicit Chessboard():Model("start"),currentMove(BLACK, ccp(-1, -1), ccp(-1, -1)){}
+    explicit Chessboard():Model("start"),currentMove(BLACK, Vec2(-1, -1), Vec2(-1, -1)){}
     
     virtual ~Chessboard();
     bool init();
@@ -60,7 +60,7 @@ public:
     // for test, not recommend to use
     void setPieces(PIECE _pieces[][WIDTH]);
     void setPieces(const ChessboardData& data );
-    PIECE getPiece(const cocos2d::CCPoint& p);
+    PIECE getPiece(const cocos2d::Vec2& p);
     
 };
 

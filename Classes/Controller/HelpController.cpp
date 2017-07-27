@@ -55,7 +55,7 @@ bool HelpController::init(){
     chessboard->setPieces(datas[0]);
     ChessboardController::initPieceViews();
     
-    label = CCLabelTTF::create(dynamic_cast<__String*>(intros->objectAtIndex(0))->getCString(), "Helvetica-Bold", 32.0f);
+    label = Label::createWithTTF(dynamic_cast<__String*>(intros->getObjectAtIndex(0))->getCString(), "Marker Felt.ttf", 32.0f);
     label->setPosition(Vec2(320, 960));
     label->setColor(Color3B::BLACK);
     this->addChild(label);
@@ -83,11 +83,11 @@ void HelpController::onTouchEnded(Touch *touch, Event *event){
             chessboard->setPieces(datas[index]);
             this->initPieceViews();
         }
-        label->setString(dynamic_cast<__String*>(intros->objectAtIndex(progress))->getCString());
+        label->setString(dynamic_cast<__String*>(intros->getObjectAtIndex(progress))->getCString());
     }else{
         StartScene* scene = StartScene::create();
-        CCTransitionSlideInR* slide = CCTransitionSlideInR::create(0.3, scene);
-        CCDirector::sharedDirector()->replaceScene(slide);
+        TransitionSlideInR* slide = TransitionSlideInR::create(0.3, scene);
+        Director::getInstance()->replaceScene(slide);
     }
 
 }

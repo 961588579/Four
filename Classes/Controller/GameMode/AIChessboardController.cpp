@@ -71,11 +71,11 @@ void AIChessboardController::tryAIRegret(Ref *o){
     if (chessboard->checkMessage(REGRET_MSG)){
         chessboard->alterAIRegret();
         
-        CCString* frame_name = ( chessboard->getCurrentMove().currentRound == WHITE ) ? CCString::create("black.png") : CCString::create("white.png");
+        __String* frame_name = ( chessboard->getCurrentMove().currentRound == WHITE ) ? __String::create("black.png") : __String::create("white.png");
         
-        for (CCPoint p : chessboard->getCurrentMove().eatenPoints) {
-            CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();
-            CCSprite* piece = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->spriteFrameByName(frame_name->getCString()), p);
+        for (Vec2 p : chessboard->getCurrentMove().eatenPoints) {
+            SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+            Sprite* piece = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->getSpriteFrameByName(frame_name->getCString()), p);
             this->addChild(piece);
         }
     }

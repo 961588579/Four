@@ -13,7 +13,7 @@
 
 using namespace cocos2d;
 
-class RotFlowerParticle : public CCParticleSnow {
+class RotFlowerParticle : public ParticleSnow {
     
     
 public:

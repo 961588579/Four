@@ -23,60 +23,60 @@ bool StartController::init(){
     
     // load res
     
-    CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();
+    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     
-    CCSprite* four_logo = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("four_logo.png"));
-    four_logo->setPosition(ccp(320, 960));
+    Sprite* four_logo = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("four_logo.png"));
+    four_logo->setPosition(Vec2(320, 960));
     this->addChild(four_logo);
 
-    CCSprite* h2h = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("h2h.png"));
+    Sprite* h2h = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("h2h.png"));
     ImageButton* h2hButton = ImageButton::create(h2h, this, menu_selector(StartController::onH2H));
-    h2hButton->setPosition(LogicToReal(ccp(1, 2)));
+    h2hButton->setPosition(LogicToReal(Vec2(1, 2)));
 
     
     
-    CCSprite* h2c = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("h2c.png"));
+    Sprite* h2c = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("h2c.png"));
     ImageButton* h2cButton = ImageButton::create(h2c, this, menu_selector(StartController::onH2C));
-    h2cButton->setPosition(LogicToReal(ccp(2, 2)));
+    h2cButton->setPosition(LogicToReal(Vec2(2, 2)));
     
-    CCSprite* fixTime = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("help.png"));
+    Sprite* fixTime = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("help.png"));
     ImageButton* fixTimeButton = ImageButton::create(fixTime, this, menu_selector(StartController::onFixTime));
-    fixTimeButton->setPosition(LogicToReal(ccp(1, 1)));
+    fixTimeButton->setPosition(LogicToReal(Vec2(1, 1)));
     
-    CCSprite* fixMove = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("exit.png"));
+    Sprite* fixMove = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("exit.png"));
     ImageButton* fixMoveButton = ImageButton::create(fixMove, this, menu_selector(StartController::onFixMove));
-    fixMoveButton->setPosition(LogicToReal(ccp(2, 1)));
+    fixMoveButton->setPosition(LogicToReal(Vec2(2, 1)));
     
-    CCMenu* menu = CCMenu::create(h2hButton, h2cButton, fixTimeButton, fixMoveButton, NULL);
-    menu->setPosition(ccp(0, 0));
+    Menu* menu = Menu::create(h2hButton, h2cButton, fixTimeButton, fixMoveButton, NULL);
+    menu->setPosition(Vec2(0, 0));
     this->addChild(menu);
     
     return true;
 }
 
-void transfer2NextScene(CCScene* scene){
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(CLICK_MSG);
-    CCTransitionSlideInR* slide = CCTransitionSlideInR::create(0.3, scene);
-    CCDirector::sharedDirector()->replaceScene(slide);
+void transfer2NextScene(Scene* scene){
+    __NotificationCenter::getInstance()->postNotification(CLICK_MSG);
+    TransitionSlideInR* slide = TransitionSlideInR::create(0.3, scene);
+    Director::getInstance()->replaceScene(slide);
 }
 
-void StartController::onH2H(CCObject* o){
-    CCScene* gs = GameScene::create();
+void StartController::onH2H(Ref* o){
+    Scene* gs = GameScene::create();
     transfer2NextScene(gs);
 }
 
-void StartController::onH2C(CCObject* o){
-    CCScene* gs = AIGameScene::create();
+void StartController::onH2C(Ref* o){
+    Scene* gs = AIGameScene::create();
     transfer2NextScene(gs);
 }
 
-void StartController::onFixTime(CCObject* o){
-    CCScene* gs = FixTimeAIGameScene::create();
+void StartController::onFixTime(Ref* o){
+    Scene* gs = FixTimeAIGameScene::create();
     transfer2NextScene(gs);
 }
 
-void StartController::onFixMove(CCObject* o){
-    CCScene* gs = FixMoveAIGameScene::create();
+void StartController::onFixMove(Ref* o){
+    Scene* gs = FixMoveAIGameScene::create();
     transfer2NextScene(gs);
 }
 

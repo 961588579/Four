@@ -11,9 +11,9 @@
 
 
 bool HelpScene::init(){
-    cocos2d::CCScene::create();
+    Scene::create();
     
-    CCLayer* layer = HelpController::create();
+    Layer* layer = HelpController::create();
     this->addChild(layer);
     
     return true;

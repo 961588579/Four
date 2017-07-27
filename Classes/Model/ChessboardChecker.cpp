@@ -51,17 +51,17 @@ bool checkMove( const ChessboardData& pieces, const Move& move ){
 }
 
 bool checkEat( const ChessboardData& pieces, Move& move ){
-    cocos2d::CCPoint currentPoint = move.dest;
+    cocos2d::Vec2 currentPoint = move.dest;
     PIECE currentRound = move.currentRound;
-    std::vector<cocos2d::CCPoint>& eatenPoints = move.eatenPoints;
+    std::vector<cocos2d::Vec2>& eatenPoints = move.eatenPoints;
     
-    cocos2d::CCPoint directions[4] = {ccp(1, 0), ccp(-1, 0), ccp(0, 1), ccp(0, -1)};
+    cocos2d::Vec2 directions[4] = {Vec2(1, 0), Vec2(-1, 0), Vec2(0, 1), Vec2(0, -1)};
     for(auto direction : directions){
-        CCPoint first = currentPoint + direction;
+        Vec2 first = currentPoint + direction;
         if (inbound(first) && getPiece(pieces, first) == currentRound){
-            CCPoint second = currentPoint + direction * 2;
+            Vec2 second = currentPoint + direction * 2;
             if (inbound(second)){
-                CCPoint third = currentPoint + direction * 3;
+                Vec2 third = currentPoint + direction * 3;
                 if (inbound(third)) {
                     if (getPiece(pieces, second) == oppositePiece(currentRound) && getPiece(pieces, third) == ZERO){
                         eatenPoints.push_back(second);
@@ -76,7 +76,7 @@ bool checkEat( const ChessboardData& pieces, Move& move ){
                 }
             }else{
                 second = currentPoint - direction;
-                CCPoint third = currentPoint - direction * 2;
+                Vec2 third = currentPoint - direction * 2;
                 if (getPiece(pieces, second) == oppositePiece(currentRound) && getPiece(pieces, third) == ZERO){
                     eatenPoints.push_back(second);
                 }

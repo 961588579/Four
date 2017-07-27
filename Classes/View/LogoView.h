@@ -15,20 +15,20 @@
 
 using namespace cocos2d;
 
-class LogoView : public CCSprite {
+class LogoView : public Sprite {
     CC_SYNTHESIZE(const Move*, currentMove, CurrentMove);
     CC_SYNTHESIZE(PIECE, presentRound, PresentRound);
     
 public:
     bool init();
     CREATE_FUNC(LogoView);
-    static LogoView* create(const Move* _currentMove, CCSpriteFrame* frame, PIECE _presentRound);
+    static LogoView* create(const Move* _currentMove, SpriteFrame* frame, PIECE _presentRound);
     virtual ~LogoView();
     
     void onEnter();
     
     // listener
-    void onNextRound(CCObject* o);
+    void onNextRound(Ref* o);
 
     // 在有AI的情况下LogoView需要对胜利或者失败的场景做出反应
     void activateStop();

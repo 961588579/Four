@@ -33,7 +33,7 @@ void ChessboardController::initPieceViews(){
                 frame_name = new __String("white.png");
             else
                 continue;
-            Sprite* black = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->spriteFrameByName(frame_name->getCString()), Vec2(j, i));
+            Sprite* black = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->getSpriteFrameByName(frame_name->getCString()), Vec2(j, i));
             this->addChild(black);
         }
     }
@@ -71,7 +71,7 @@ bool ChessboardController::init(){
     this->addChild(black_logo);
     this->addChild(white_logo);
     
-    modeLabel = Label::createWithTTF("人人对战", "Helvetica-Bold", 32.0f);
+    modeLabel = Label::createWithTTF("人人对战", "Marker Felt.ttf", 32.0f);
     modeLabel->setColor(Color3B::BLACK);
     modeLabel->setPosition(Vec2(320, 1050));
     CC_SAFE_RETAIN(modeLabel);
@@ -127,7 +127,7 @@ void ChessboardController::onTouchEnded(Touch *pTouch, Event *pEvent){
 void ChessboardController::tryMove(const Vec2& src, const Vec2& dest){
     if (dest.equals(src))
         return;
-    CCPoint newDest = (dest - src) / (dest - src).getLength() + src;
+    Vec2 newDest = (dest - src) / (dest - src).getLength() + src;
     Move move(chessboard->getCurrentMove().currentRound,src, newDest);
     if(chessboard->checkMessage(BEGIN_MOVE_MSG) && chessboard->checkMove(move)){
         chessboard->alterMove(move);
@@ -166,7 +166,7 @@ void ChessboardController::tryRegret(Ref *o){
         
         for (Vec2 p : chessboard->getCurrentMove().eatenPoints) {
             SpriteFrameCache* cache = SpriteFrameCache::getInstance();
-            Sprite* piece = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->spriteFrameByName(frame_name->getCString()), p);
+            Sprite* piece = PieceView::create(&(this->chessboard->getCurrentMove()), this->chessboard, cache->getSpriteFrameByName(frame_name->getCString()), p);
             this->addChild(piece);
         }
     }

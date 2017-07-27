@@ -10,12 +10,12 @@
 #include "Message.h"
 
 ResultView::~ResultView(){
-    CCNotificationCenter::sharedNotificationCenter()->removeAllObservers(this);
+    __NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool ResultView::init(){
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(ResultView::onWin), WIN_MSG, nullptr);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(ResultView::onLose), LOSE_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(ResultView::onWin), WIN_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(ResultView::onLose), LOSE_MSG, nullptr);
     
     Label::initWithTTF("", "Helvetica-Bold", 96.0f);
     this->setColor(Color3B::BLACK);
@@ -24,12 +24,12 @@ bool ResultView::init(){
     return true;
 }
 
-void ResultView::onWin(CCObject* o){
+void ResultView::onWin(Ref* o){
     this->setString("WIN");
-    this->runAction(CCEaseElasticOut::create(CCMoveTo::create(0.5f, ccp(320, 960))));
+    this->runAction(CCEaseElasticOut::create(CCMoveTo::create(0.5f, Vec2(320, 960))));
 }
 
-void ResultView::onLose(CCObject* o){
+void ResultView::onLose(Ref* o){
     this->setString("LOSE");
-    this->runAction(CCEaseElasticOut::create(CCMoveTo::create(0.5f, ccp(320, 960))));
+    this->runAction(CCEaseElasticOut::create(CCMoveTo::create(0.5f, Vec2(320, 960))));
 }

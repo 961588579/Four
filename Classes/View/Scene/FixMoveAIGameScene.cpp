@@ -12,9 +12,9 @@
 
 bool FixMoveAIGameScene::init(){
     
-    CCLayer* l1 = FixMoveAIChessboardController::create();
+    Layer* l1 = FixMoveAIChessboardController::create();
     this->addChild(l1);
-    CCLayer* l2 = MenuController::create();
+    Layer* l2 = MenuController::create();
     this->addChild(l2);
     
     return true;

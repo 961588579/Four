@@ -33,9 +33,9 @@ public:
     virtual void onEnter();
     virtual void onExit();
     
-    virtual void onNextRound(CCObject* o);
-    virtual void tryAIRegret(CCObject* o);
-    virtual void tryWin(CCObject* o);
+    virtual void onNextRound(Ref* o);
+    virtual void tryAIRegret(Ref* o);
+    virtual void tryWin(Ref* o);
 };
 
 #endif /* defined(__Four__AIChessboardController__) */

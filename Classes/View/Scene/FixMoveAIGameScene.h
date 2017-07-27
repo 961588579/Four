@@ -11,9 +11,9 @@
 
 #include "cocos2d.h"
 
-using cocos2d::CCScene;
+using cocos2d::Scene;
 
-class FixMoveAIGameScene : public CCScene {
+class FixMoveAIGameScene : public Scene {
     
 public:
     virtual bool init();

@@ -29,12 +29,12 @@ void TimeBoard::onEnter(){
 void TimeBoard::onExit(){
     Label::onExit();
     __NotificationCenter::getInstance()->removeAllObservers(this);
-    this->unscheduleAllSelectors();
+    this->unscheduleAllCallbacks();
 }
 
 void TimeBoard::onTimeChanged(float dt){
     leftSeconds--;
-    CCString* str = CCString::createWithFormat("Time : %d", leftSeconds);
+    __String* str = __String::createWithFormat("Time : %d", leftSeconds);
     this->setString(str->getCString());
     if (leftSeconds == 0) {
         __NotificationCenter::getInstance()->postNotification(LOSE_MSG);

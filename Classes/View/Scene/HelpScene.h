@@ -11,9 +11,9 @@
 
 #include "cocos2d.h"
 
-using cocos2d::CCScene;
+using namespace cocos2d;
 
-class HelpScene : public CCScene {
+class HelpScene : public Scene {
     
 public:
     virtual bool init();

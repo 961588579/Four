@@ -35,68 +35,66 @@ void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictio
 
 bool MenuController::init(){
     
-    if (! CCLayer::init()) {
+    if (!Layer::init()) {
         return false;
     }
-    
-    CCSpriteBatchNode* batch = CCSpriteBatchNode::create("AllSprites.png");
-    this->addChild(batch);
-    CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();
-    cache->addSpriteFramesWithFile("AllSprites.plist");
-    
-    CCSprite* background = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("menubar.png"));
-    background->setAnchorPoint(ccp(0, 0));
-    background->setPosition(ccp(0, 0));
+
+
+    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+
+    Sprite* background = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("menubar.png"));
+    background->setAnchorPoint(Vec2(0, 0));
+    background->setPosition(Vec2(0, 0));
     this->addChild(background);
     
-    CCSprite* back = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("back.png"));
+    Sprite* back = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("back.png"));
     ImageButton* backButton = ImageButton::create(back, this, menu_selector(MenuController::onBack));
-    backButton->setPosition(ccp(128, 48));
+    backButton->setPosition(Vec2(128, 48));
     
-    CCSprite* regret = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("regret.png"));
+    Sprite* regret = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("regret.png"));
     ImageButton* regretButton = ImageButton::create(regret, this, menu_selector(MenuController::onRegret));
-    regretButton->setPosition(ccp(320, 48));
+    regretButton->setPosition(Vec2(320, 48));
     
-    CCSprite* plus = CCSprite::createWithSpriteFrame(cache->spriteFrameByName("plus.png"));
+    Sprite* plus = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("plus.png"));
     ImageButton* plusButton = ImageButton::create(plus, this, menu_selector(MenuController::onShare));
-    plusButton->setPosition(ccp(512, 48));
+    plusButton->setPosition(Vec2(512, 48));
     
-    CCMenu* menu = CCMenu::create(backButton, regretButton, plusButton, NULL);
-    menu->setPosition(ccp(0, 0));
+    Menu* menu = Menu::create(backButton, regretButton, plusButton, NULL);
+    menu->setPosition(Vec2(0, 0));
     this->addChild(menu);
     
     return true;
 }
 
-void MenuController::onBack(CCObject* o){
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(CLICK_MSG);
+void MenuController::onBack(Ref* o){
+    __NotificationCenter::getInstance()->postNotification(CLICK_MSG);
     StartScene* ss = StartScene::create();
-    CCTransitionSlideInL* slide = CCTransitionSlideInL::create(0.3f, ss);
-    CCDirector::sharedDirector()->replaceScene(slide);
+    TransitionSlideInL* slide = TransitionSlideInL::create(0.3f, ss);
+    Director::getInstance()->replaceScene(slide);
 }
 
-void MenuController::onRegret(cocos2d::CCObject *o){
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(CLICK_MSG);
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(CLICK_REGRET_MSG);
+void MenuController::onRegret(cocos2d::Ref *o){
+    __NotificationCenter::getInstance()->postNotification(CLICK_MSG);
+    __NotificationCenter::getInstance()->postNotification(CLICK_REGRET_MSG);
 }
 
-void MenuController::onShare(cocos2d::CCObject *o){
+void MenuController::onShare(cocos2d::Ref *o){
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(CLICK_MSG);
+    __NotificationCenter::getInstance()->postNotification(CLICK_MSG);
        CCDictionary *content = CCDictionary::create();
-    content -> setObject(CCString::create("这是一条测试内容"), "content");
-    content -> setObject(CCString::create("http://img0.bdstatic.com/img/image/308342ac65c10385343da168d569113b07ecb8088ef.jpg"), "image");
-    content -> setObject(CCString::create("测试标题"), "title");
-    content -> setObject(CCString::create("测试描述"), "description");
-    content -> setObject(CCString::create("http://sharesdk.cn"), "url");
-    content -> setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
-    content -> setObject(CCString::create("http://sharesdk.cn"), "siteUrl");
-    content -> setObject(CCString::create("ShareSDK"), "site");
-    content -> setObject(CCString::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");
-    content -> setObject(CCString::create("extInfo"), "extInfo");
+    content -> setObject(__String::create("这是一条测试内容"), "content");
+    content -> setObject(__String::create("http://img0.bdstatic.com/img/image/308342ac65c10385343da168d569113b07ecb8088ef.jpg"), "image");
+    content -> setObject(__String::create("测试标题"), "title");
+    content -> setObject(__String::create("测试描述"), "description");
+    content -> setObject(__String::create("http://sharesdk.cn"), "url");
+    content -> setObject(__String::createWithFormat("%d", C2DXContentTypeNews), "type");
+    content -> setObject(__String::create("http://sharesdk.cn"), "siteUrl");
+    content -> setObject(__String::create("ShareSDK"), "site");
+    content -> setObject(__String::create("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"), "musicUrl");
+    content -> setObject(__String::create("extInfo"), "extInfo");
     
-    C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
+    C2DXShareSDK::showShareMenu(NULL, content, Vec2Make(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
 #endif
 }
 

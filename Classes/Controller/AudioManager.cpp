@@ -20,16 +20,16 @@ bool AudioManager::init(){
     CC_SAFE_RETAIN(msg2audio);
     FileUtils::getInstance()->addSearchPath("audio/");
     
-    msg2audio->setObject(StringMake("move.WAV"), BEGIN_MOVE_MSG);
-    msg2audio->setObject(StringMake("eat.WAV"), BEGIN_EAT_MSG);
-    msg2audio->setObject(StringMake("next_round.WAV"), NEXT_ROUND_MSG);
-    msg2audio->setObject(StringMake("click.WAV"), CLICK_MSG);
-//    msg2audio->setObject(CCStringMake("create.WAV"), CREATE_MSG);
+    msg2audio->setObject(__String::create("move.WAV"), BEGIN_MOVE_MSG);
+    msg2audio->setObject(__String::create("eat.WAV"), BEGIN_EAT_MSG);
+    msg2audio->setObject(__String::create("next_round.WAV"), NEXT_ROUND_MSG);
+    msg2audio->setObject(__String::create("click.WAV"), CLICK_MSG);
+//    msg2audio->setObject(__StringMake("create.WAV"), CREATE_MSG);
     
     DictElement* e = nullptr;
     CCDICT_FOREACH(msg2audio, e){
         __NotificationCenter::getInstance()->addObserver(this, CC_CALLFUNCO_SELECTOR(AudioManager::play), e->getStrKey(), e->getObject());
-//        CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(((CCString *)e->getObject())->getCString());
+//        CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(((__String *)e->getObject())->getCString());
     }
     
     return true;

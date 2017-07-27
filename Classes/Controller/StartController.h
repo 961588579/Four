@@ -22,13 +22,13 @@ public:
     CREATE_FUNC(StartController);
     
     // 进行人人对战
-    void onH2H(CCObject* o);
+    void onH2H(Ref* o);
     // 进行人机对战
-    void onH2C(CCObject* o);
+    void onH2C(Ref* o);
     // 当固定时间进行人机对战时
-    void onFixTime(CCObject* o);
+    void onFixTime(Ref* o);
     // 当固定步数进行人机对战时
-    void onFixMove(CCObject* o);
+    void onFixMove(Ref* o);
 };
 
 

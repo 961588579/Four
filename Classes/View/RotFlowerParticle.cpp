@@ -10,28 +10,28 @@
 
 bool RotFlowerParticle::init(){
     
-    CCParticleSnow::init();
+    ParticleSnow::init();
     
-    this->setTexture(CCTextureCache::sharedTextureCache()->addImage("star.png"));
+    this->setTexture(TextureCache::sharedTextureCache()->addImage("star.png"));
     this->setEmissionRate(this->getTotalParticles() / this->getLife());
-    this->setPosition(ccp(320, 1100));
+    this->setPosition(Vec2(320, 1100));
     this->setLife(3);
     this->setLifeVar(1);
-    this->setGravity(CCPointZero);
+    this->setGravity(Vec2::ZERO);
     this->setSpeed(130);
     this->setSpeedVar(30);
     
     // color of particles
-    ccColor4F startColor = {0.5f, 0.5f, 0.5f, 1.0f};
+    Color4F startColor = {0.5f, 0.5f, 0.5f, 1.0f};
     this->setStartColor(startColor);
     
-    ccColor4F startColorVar = {0.5f, 0.5f, 0.5f, 1.0f};
+    Color4F startColorVar = {0.5f, 0.5f, 0.5f, 1.0f};
     this->setStartColorVar(startColorVar);
     
-    ccColor4F endColor = {0.1f, 0.1f, 0.1f, 0.2f};
+    Color4F endColor = {0.1f, 0.1f, 0.1f, 0.2f};
     this->setEndColor(endColor);
     
-    ccColor4F endColorVar = {0.1f, 0.1f, 0.1f, 0.2f};
+    Color4F endColorVar = {0.1f, 0.1f, 0.1f, 0.2f};
     this->setEndColorVar(endColorVar);
     
     this->setScale(2.0);

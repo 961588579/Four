@@ -12,14 +12,10 @@ bool BaseController::init(){
     if (!Layer::init()) {
         return false;
     }
-    
-    // load res
-//    SpriteBatchNode* batch = SpriteBatchNode::create("AllSprites.png");
-//    this->addChild(batch);
-    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
-    cache->addSpriteFramesWithFile("AllSprites.plist");
+
     
     // add background
+    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     Sprite* background = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName("background.png"));
     background->setAnchorPoint(Vec2(0, 0));
     background->setPosition(Vec2(0, 0));

@@ -10,19 +10,19 @@
 #include "Message.h"
 
 LogoView::~LogoView(){
-    CCNotificationCenter::sharedNotificationCenter()->removeAllObservers(this);
+    __NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool LogoView::init(){
-    CCSprite::init();
+    Sprite::init();
     
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(LogoView::onNextRound), NEXT_ROUND_MSG, nullptr);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(LogoView::onNextRound), REGRET_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(LogoView::onNextRound), NEXT_ROUND_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(LogoView::onNextRound), REGRET_MSG, nullptr);
     
     return true;
 }
 
-LogoView* LogoView::create(const Move *_currentMove, cocos2d::CCSpriteFrame *frame, PIECE _presentRound){
+LogoView* LogoView::create(const Move *_currentMove, cocos2d::SpriteFrame *frame, PIECE _presentRound){
     LogoView* view = LogoView::create();
     view->setDisplayFrame(frame);
     view->setCurrentMove(_currentMove);
@@ -31,24 +31,24 @@ LogoView* LogoView::create(const Move *_currentMove, cocos2d::CCSpriteFrame *fra
 }
 
 void LogoView::onEnter(){
-    CCSprite::onEnter();
-    this->setPosition(ccp(832, 960));
+    Sprite::onEnter();
+    this->setPosition(Vec2(832, 960));
     if (this->presentRound == this->currentMove->currentRound ){
         this->onNextRound(nullptr);
     }
 }
 
-void LogoView::onNextRound(CCObject* o){
+void LogoView::onNextRound(Ref* o){
     if (this->presentRound == this->currentMove->currentRound ) {
-        this->runAction(CCEaseElasticOut::create(CCMoveTo::create(1.0f, ccp(320, 960))));
+        this->runAction(CCEaseElasticOut::create(CCMoveTo::create(1.0f, Vec2(320, 960))));
     }else{
-        this->runAction(CCSequence::createWithTwoActions(CCMoveTo::create(0.4f, ccp(-192, 960)), CCPlace::create(ccp(832, 960)) ) );
+        this->runAction(CCSequence::createWithTwoActions(CCMoveTo::create(0.4f, Vec2(-192, 960)), CCPlace::create(Vec2(832, 960)) ) );
     }
 }
 
 void LogoView::activateStop(){
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(LogoView::onStop), WIN_MSG, nullptr);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(LogoView::onStop), LOSE_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(LogoView::onStop), WIN_MSG, nullptr);
+    __NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(LogoView::onStop), LOSE_MSG, nullptr);
 }
 
 void LogoView::onStop(Ref *ref){

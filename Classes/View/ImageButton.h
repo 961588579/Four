@@ -13,13 +13,13 @@
 
 using namespace cocos2d;
 
-class ImageButton : public CCMenuItemSprite {
+class ImageButton : public MenuItemSprite {
     
 public:
     void onEnter();
     void onExit();
     
-    static ImageButton* create(CCNode* sprite, CCObject* target, SEL_MenuHandler selector);
+    static ImageButton* create(Node* sprite, Ref* target, SEL_MenuHandler selector);
     
 };
 

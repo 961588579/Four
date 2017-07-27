@@ -13,7 +13,7 @@
 #include <algorithm>
 
 Chessboard::~Chessboard(){
-//    cocos2d::CCNotificationCenter::sharedNotificationCenter()->removeAllObservers(this);
+//    cocos2d::__NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool Chessboard::init(){
@@ -65,7 +65,7 @@ bool Chessboard::checkEat(Move& move){
 // 检测能否吃掉一个棋子
 void Chessboard::alterEat(const Move& move){
     currentMove.eatenPoints = move.eatenPoints;
-    std::vector<cocos2d::CCPoint>& eatenPoints = currentMove.eatenPoints;
+    std::vector<cocos2d::Vec2>& eatenPoints = currentMove.eatenPoints;
     
 
     for (auto point : eatenPoints) {
@@ -96,22 +96,22 @@ void Chessboard::alterMove(const Move& move){
     this->onMessage(BEGIN_MOVE_MSG);
 }
 
-void Chessboard::setPiece(const cocos2d::CCPoint& p, PIECE type){
+void Chessboard::setPiece(const cocos2d::Vec2& p, PIECE type){
     pieces[p.y][p.x] = type;
 }
 
-PIECE Chessboard::getPiece(const cocos2d::CCPoint& p){
+PIECE Chessboard::getPiece(const cocos2d::Vec2& p){
     return pieces[p.y][p.x];
 }
 
 void Chessboard::setPieces(PIECE _pieces[][WIDTH]){
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
-            if (getPiece(ccp(j, i)) != ZERO )
-                currentMove.eatenPoints.push_back(ccp(j, i));
+            if (getPiece(Vec2(j, i)) != ZERO )
+                currentMove.eatenPoints.push_back(Vec2(j, i));
         }
     }
-    cocos2d::CCNotificationCenter::sharedNotificationCenter()->postNotification(BEGIN_EAT_MSG);
+    cocos2d::__NotificationCenter::getInstance()->postNotification(BEGIN_EAT_MSG);
     pieces.clear();
     Pieces2Data(_pieces, pieces);
     return ;
@@ -121,11 +121,11 @@ void Chessboard::setPieces(const ChessboardData& data ){
     currentMove.eatenPoints.clear();
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
-            if (getPiece(ccp(j, i)) != ZERO )
-                currentMove.eatenPoints.push_back(ccp(j, i));
+            if (getPiece(Vec2(j, i)) != ZERO )
+                currentMove.eatenPoints.push_back(Vec2(j, i));
         }
     }
-    cocos2d::CCNotificationCenter::sharedNotificationCenter()->postNotification(BEGIN_EAT_MSG);
+    cocos2d::__NotificationCenter::getInstance()->postNotification(BEGIN_EAT_MSG);
     pieces.clear();
     pieces = data;
     return;
@@ -135,8 +135,8 @@ void Chessboard::alterNextRound(){
     Move move(currentMove);
     moves.push(move);
     currentMove.currentRound = oppositePiece(currentMove.currentRound);
-    currentMove.src = ccp(-1, -1);
-    currentMove.dest = ccp(-1, -1);
+    currentMove.src = Vec2(-1, -1);
+    currentMove.dest = Vec2(-1, -1);
     currentMove.eatenPoints.clear();
 
     this->onMessage(NEXT_ROUND_MSG, this);
@@ -148,7 +148,7 @@ void Chessboard::alterRegret(){
         return;
     currentMove = moves.top();
     moves.pop();
-    for (CCPoint p : currentMove.eatenPoints) {
+    for (Vec2 p : currentMove.eatenPoints) {
         setPiece(p, oppositePiece(currentMove.currentRound));
     }
     setPiece(currentMove.dest, ZERO);
@@ -161,7 +161,7 @@ void Chessboard::alterAIRegret(){
         return;
     currentMove = moves.top();
     moves.pop();
-    for (CCPoint p : currentMove.eatenPoints) {
+    for (Vec2 p : currentMove.eatenPoints) {
         setPiece(p, oppositePiece(currentMove.currentRound));
     }
     setPiece(currentMove.dest, ZERO);

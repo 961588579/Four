@@ -15,29 +15,29 @@
 
 using namespace cocos2d;
 
-class PieceView : public CCSprite{
+class PieceView : public Sprite{
     CC_SYNTHESIZE(const Move*, currentMove, CurrentMove);
     CC_SYNTHESIZE(Model*, model, Model);
-    CC_SYNTHESIZE(CCActionInterval*, dropAction, DropAction);
+    CC_SYNTHESIZE(ActionInterval*, dropAction, DropAction);
     
 private:
-    bool containsTouchLocation(CCTouch* touch);
+    bool containsTouchLocation(Touch* touch);
     
 public:
     PieceView(){}
     virtual ~PieceView();
     virtual bool init();
     CREATE_FUNC(PieceView);
-    static PieceView* create(const Move* _currentMove, Model* _model, CCSpriteFrame* frame, const CCPoint& _logic_position);
+    static PieceView* create(const Move* _currentMove, Model* _model, SpriteFrame* frame, const Vec2& _logic_position);
     
     void onEnter();
     void onExit();
     
     // listener
-    void onBeginMove(CCObject* o);
-    void onBeginEat(CCObject* o);
-    void onRegret(CCObject* o);
-    void onAIRegret(CCObject* o);
+    void onBeginMove(Ref* o);
+    void onBeginEat(Ref* o);
+    void onRegret(Ref* o);
+    void onAIRegret(Ref* o);
 };
 
 #endif /* defined(__Four__PieceView__) */

@@ -10,7 +10,7 @@
 #include "StartController.h"
 
 bool StartScene::init(){
-    CCScene::init();
+    Scene::init();
     
     StartController* sc = StartController::create();
     this->addChild(sc);

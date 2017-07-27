@@ -29,7 +29,7 @@ public:
 };
 
 typedef std::vector<Solution> SolutionList;
-using cocos2d::CCObject;
+using cocos2d::Ref;
 
 
 class AIController : public Ref {

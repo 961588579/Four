@@ -13,15 +13,15 @@
 
 using namespace cocos2d;
 
-class MenuController : public CCLayer{
+class MenuController : public Layer{
     
 public:
     bool init();
     CREATE_FUNC(MenuController);
     
-    void onBack(CCObject* o);
-    void onRegret(CCObject* o);
-    void onShare(CCObject* o);
+    void onBack(Ref* o);
+    void onRegret(Ref* o);
+    void onShare(Ref* o);
 };
 
 
